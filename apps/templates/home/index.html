@@ -1,0 +1,69 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+    
+    <link href="/static/assets/vendors/@coreui/chartjs/css/coreui-chartjs.css" rel="stylesheet">
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+  <div class="body flex-grow-1 px-3">
+    <div class="container-lg">
+      <div class="row">
+        <div class="col-sm-6 col-lg-3">
+          <div class="card mb-4 text-white bg-primary">
+            <div class="card-body pb-0 d-flex justify-content-between align-items-start">
+              <div>
+                <div class="fs-4 fw-semibold">{{ user.coin}} <span class="fs-6 fw-normal">Coin</span></div>
+                <div>Balance</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-content rounded-bottom">
+          <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-518">
+            <div class="alert alert-success" role="alert">
+              <h4 class="alert-heading">Buy Coins</h4>
+              <p>100.000 VND = 100.000 Coin</p>
+              <hr>
+              <p class="mb-0">This is my information you can transfer to here and tell me.</p>
+              <hr>
+              <p class="mb-0">Transfer to account X bank Y with content Z.</p>
+              <!-- <hr>
+              <p class="mb-0">This is my information you can transfer to here and tell me.</p> -->
+            </div>
+          </div>
+          <div class="tab-pane pt-1" role="tabpanel" id="code-518">
+            <script class="language-markup" type="text/plain">
+              <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">Well done!</h4>
+                <p>Transfer to account X bank Y with content Z </p>
+                <hr>
+                <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+              </div>
+            </script>
+          </div>
+        </div>
+      </div>
+      <!-- /.row-->
+    </div>
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+  <!-- Plugins and scripts required by this view-->
+  <script src="/static/assets/vendors/chart.js/js/chart.min.js"></script>
+  <script src="/static/assets/vendors/@coreui/chartjs/js/coreui-chartjs.js"></script>
+  <script src="/static/assets/vendors/@coreui/utils/js/coreui-utils.js"></script>
+  <script src="/static/assets/js/main.js"></script>
+  <script>
+  </script>
+
+{% endblock javascripts %}

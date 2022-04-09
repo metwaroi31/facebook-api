@@ -1,0 +1,49 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Forms Control {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<div class="col-12">
+    <div class="card mb-4">
+      <div class="card-header"><strong>User profile</strong><span class="small ms-1"></span></div>
+      <div class="card-body">
+        <div class="example">
+          <div class="tab-content rounded-bottom">
+            <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1103">
+              <input class="form-control" type="text" placeholder={{user.username}} aria-label="Disabled input example" disabled="">
+              <input class="form-control" type="text" placeholder={{user.email}} aria-label="Disabled input example" disabled="" readonly="">
+              <input class="form-control" type="text" placeholder={{user.coin}} aria-label="Disabled input example" disabled="" readonly="">
+            
+            </div>
+
+            <div class="tab-pane pt-1" role="tabpanel" id="code-1103">
+              <script class="language-markup" type="text/plain">
+                <input class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled input example" disabled>
+                <input class="form-control" type="text" placeholder="Disabled readonly input" aria-label="Disabled input example" disabled readonly>
+              </script>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <form role="form" method="post" action="">
+                
+        {{ form.hidden_tag() }} 
+            <div class="input-group mb-3"><span class="input-group-text">Coin </span>
+                {{ form.coin(class="form-control", placeholder=user.coin) }}
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <button class="btn btn-primary px-4" type="submit" name="addmat">change coin</button>
+              </div>
+            </div>
+    </form> 
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

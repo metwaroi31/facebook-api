@@ -1,0 +1,52 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Forms Control {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="body flex-grow-1 px-3">
+    <div class="container-lg">
+      <div class="callout callout-info bg-white">
+        Price : 48 coin/like/day
+        We can only process one request at one time. When you buy one, please wait until the current order is finished
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-4">
+            <p class="text-medium-emphasis">
+                {% if msg %}
+                  {{ msg | safe }}  
+                {% endif %}                      
+            </p>
+            <form role="form" method="post" action="">
+                
+                {{ form.hidden_tag() }} 
+                    <div class="input-group mb-3"><span class="input-group-text">facebook id </span>
+                        {{ form.facebook_id(class="form-control") }}
+                    </div>
+                    <div class="input-group mb-4"><span class="input-group-text">name </span>
+                        {{ form.name(class="form-control") }}
+                    </div>
+                    <div class="input-group mb-3"><span class="input-group-text">days</span>
+                      {{ form.time(class="form-control") }}
+                    </div>
+                    <div class="input-group mb-4"><span class="input-group-text">number of likes</span>
+                      {{ form.like(class="form-control") }}
+                    </div>
+                    <!-- <div class="input-group mb-3"><span class="input-group-text" id="basic-addon1">@</span>
+                        <input class="form-control" type="text" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                    </div> -->
+                    <div class="row">
+                      <div class="col-6">
+                        <button class="btn btn-primary px-4" type="submit" name="addlike">buy</button>
+                      </div>
+                    </div>
+            </form> 
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
