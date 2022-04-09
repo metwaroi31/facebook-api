@@ -15,4 +15,3 @@ google-api-python-client
 google-auth
 authlib==0.11
 click
-flask_mysqldb

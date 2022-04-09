@@ -33,14 +33,8 @@ class Config(object):
     MAIL_DEFAULT_SENDER = 'from@example.com'
 
     # This will create a file in <app> FOLDER
-    SQLALCHEMY_DATABASE_URI = '{}://{}:{}@{}:{}/{}'.format(
-        config('DB_ENGINE', default='postgresql'),
-        config('DB_USERNAME', default='appseed'),
-        config('DB_PASS', default='pass'),
-        config('DB_HOST', default='localhost'),
-        config('DB_PORT', default=5432),
-        config('DB_NAME', default='appseed-flask')
-    )
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'db.sqlite3')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
     # google service 
     # CLIENT_ID = "331960905561-61rn63sciv8flf59ru113mds69nufaon.apps.googleusercontent.com"
     AUTHENTICATION_SERVICE_ID = "oesauniusdfniuhaeoapidpcneoisnfg"
