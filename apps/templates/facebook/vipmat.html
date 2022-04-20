@@ -21,32 +21,131 @@
                   {{ msg | safe }}  
                 {% endif %}                      
             </p>
-            <form role="form" method="post" action="">
-                
-                {{ form.hidden_tag() }} 
-                    <div class="input-group mb-3"><span class="input-group-text">facebook id </span>
-                        {{ form.facebook_id(class="form-control") }}
-                    </div>
-                    <div class="input-group mb-4"><span class="input-group-text">name </span>
-                        {{ form.name(class="form-control") }}
-                    </div>
-                    <div class="input-group mb-3"><span class="input-group-text">days</span>
-                      {{ form.time(class="form-control") }}
-                    </div>
-                    <div class="input-group mb-4"><span class="input-group-text">mat</span>
-                      {{ form.mat(class="form-control") }}
-                    </div>
-                    <!-- <div class="input-group mb-3"><span class="input-group-text" id="basic-addon1">@</span>
-                        <input class="form-control" type="text" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-                    </div> -->
-                    <div class="row">
-                      <div class="col-6">
-                        <button class="btn btn-primary px-4" type="submit" name="addmat">buy</button>
+            <ul class="nav nav-tabs" role="tablist">
+              <li class="nav-item"><a class="nav-link active" data-coreui-toggle="tab" href="#add-comment" role="tab">
+                  <svg class="icon me-2">
+                    <use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-media-play"></use>
+                  </svg>Tạo đơn hàng mới</a>
+              </li>
+              <li class="nav-item"><a class="nav-link" data-coreui-toggle="tab" href="#active-vip-comment" role="tab">
+                  <svg class="icon me-2">
+                    <use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-media-play"></use>
+                  </svg>Danh sách VIP</a>
+              </li>
+              <li class="nav-item"><a class="nav-link" data-coreui-toggle="tab" href="#disactive-vip-like" role="tab">
+                  <svg class="icon me-2">
+                    <use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-media-play"></use>
+                  </svg>Danh sách VIP hết hạn</a>
+              </li>
+            </ul>
+            <div class="tab-content rounded-bottom">
+              <div class="tab-pane p-3 active preview" role="tabpanel" id="add-comment">
+                  <form role="form" method="post" action="">
+                  
+                  {{ form.hidden_tag() }} 
+                      <div class="input-group mb-3"><span class="input-group-text">facebook id </span>
+                          {{ form.facebook_id(class="form-control") }}
                       </div>
-                    </div>
-            </form> 
-
+                      <div class="input-group mb-4"><span class="input-group-text">name </span>
+                          {{ form.name(class="form-control") }}
+                      </div>
+                      <div class="input-group mb-3"><span class="input-group-text">Thời gian</span>
+                        {{ form.time(class="form-control", id="input-time") }}
+                      </div>
+                      <div class="input-group mb-4"><span class="input-group-text">Số lượng</span>
+                        {{ form.mat(class="form-control", id="input-mat") }}
+                      </div>
+                      <!-- <div class="input-group mb-3"><span class="input-group-text" id="basic-addon1">@</span>
+                          <input class="form-control" type="text" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                      </div> -->
+                      <div class="row">
+                        <div class="col-6">
+                          <button class="btn btn-primary px-4" type="submit" name="addmat">buy</button>
+                        </div>
+                      </div>
+                  </form>
+              <p class="text-medium-emphasis">
+                <a id="log"></a> Coin                      
+              </p>
+              </div>
+              <div class="tab-pane pt-1" role="tabpanel" id="active-vip-comment">
+                <table class="table">
+                  <!-- <caption>List of users</caption> -->
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">facebook ID</th>
+                      <th scope="col">facebook name</th>
+                      <th scope="col">Thời gian (ngay)</th>
+                      <th scope="col">Số lượng</th>
+                      <th scope="col">Ngày hết hạn</th>
+                      <th scope="col">Post</th>
+                      <th scope="col">note</th>
+                      <!-- <th scope="col">update</th>   -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for vip in viplike %}
+                      {% if vip.status.find('Hoạt động') != -1 %}
+                        <tr>
+                          <th scope="row">{{vip['0']}}</th>
+                          <td>{{ vip.id }}</td>
+                          <td>{{ vip.name }}</td>
+                          <td>{{ vip.han }}</td>
+                          <td>{{ vip.likes}}</td>
+                          <td>{{ parse_date(vip.timeend) }}</td>
+                          <td>{{ render_template_string(vip.post) | safe }}</td>
+                          <td>{{ vip.type }}</td>
+                          <td>{{ vip.note }}</td>
+                        </tr>
+                      {% endif %}
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <div class="tab-pane pt-1" role="tabpanel" id="disactive-vip-like">
+                <table class="table">
+                  <!-- <caption>List of users</caption> -->
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">facebook ID</th>
+                      <th scope="col">facebook name</th>
+                      <th scope="col">Thời gian (ngay)</th>
+                      <th scope="col">Số lượng</th>
+                      <th scope="col">Ngày hết hạn</th>
+                      <th scope="col">Post</th>
+                      <th scope="col">note</th>
+                      <!-- <th scope="col">update</th>   -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for vip in viplike %}
+                      {% if vip.status.find('Hoạt động') == -1 %}
+                        <tr>
+                          <th scope="row">{{vip['0']}}</th>
+                          <td>{{ vip.id }}</td>
+                          <td>{{ vip.name }}</td>
+                          <td>{{ vip.han }}</td>
+                          <td>{{ vip.likes}}</td>
+                          <td>{{ parse_date(vip.timeend) }}</td>
+                          <td>{{ render_template_string(vip.post) | safe }}</td>
+                          <td>{{ vip.type }}</td>
+                          <td>{{ vip.note }}</td>
+                        </tr>
+                      {% endif %}
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+</div>
 {% endblock content %}
-
+<script type = "text/javascript" src = "/static/assets/js/utils.js" ></script>
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}{% endblock javascripts %}

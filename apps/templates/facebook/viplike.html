@@ -10,8 +10,7 @@
 <div class="body flex-grow-1 px-3">
     <div class="container-lg">
       <div class="callout callout-info bg-white">
-        Price : 48 coin/like/day
-        We can only process one request at one time. When you buy one, please wait until the current order is finished
+        Giá: 48 Coin / Like/ ngay
       </div>
       <div class="row">
         <div class="col-12">
@@ -21,32 +20,208 @@
                   {{ msg | safe }}  
                 {% endif %}                      
             </p>
-            <form role="form" method="post" action="">
-                
-                {{ form.hidden_tag() }} 
-                    <div class="input-group mb-3"><span class="input-group-text">facebook id </span>
-                        {{ form.facebook_id(class="form-control") }}
-                    </div>
-                    <div class="input-group mb-4"><span class="input-group-text">name </span>
-                        {{ form.name(class="form-control") }}
-                    </div>
-                    <div class="input-group mb-3"><span class="input-group-text">days</span>
-                      {{ form.time(class="form-control") }}
-                    </div>
-                    <div class="input-group mb-4"><span class="input-group-text">number of likes</span>
-                      {{ form.like(class="form-control") }}
-                    </div>
-                    <!-- <div class="input-group mb-3"><span class="input-group-text" id="basic-addon1">@</span>
-                        <input class="form-control" type="text" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-                    </div> -->
-                    <div class="row">
-                      <div class="col-6">
-                        <button class="btn btn-primary px-4" type="submit" name="addlike">buy</button>
-                      </div>
-                    </div>
-            </form> 
-
+            <ul class="nav nav-tabs" role="tablist">
+              <li class="nav-item"><a class="nav-link active" data-coreui-toggle="tab" href="#add-like" role="tab">
+                  <svg class="icon me-2">
+                    <use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-media-play"></use>
+                  </svg>Tạo đơn hàng mới</a>
+              </li>
+              <li class="nav-item"><a class="nav-link" data-coreui-toggle="tab" href="#active-vip-like" role="tab">
+                  <svg class="icon me-2">
+                    <use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-media-play"></use>
+                  </svg>Danh sách VIP</a>
+              </li>
+              <li class="nav-item"><a class="nav-link" data-coreui-toggle="tab" href="#disactive-vip-like" role="tab">
+                  <svg class="icon me-2">
+                    <use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-media-play"></use>
+                  </svg>Danh sách VIP hết hạn</a>
+              </li>
+            </ul>
+            <div class="tab-content rounded-bottom">
+              <div class="tab-pane p-3 active preview" role="tabpanel" id="add-like">
+                <form role="form" method="post" action="">
+                    
+                    {{ form.hidden_tag() }} 
+                        <div class="input-group mb-3"><span class="input-group-text">ID trang cá nhân:</span>
+                            {{ form.facebook_id(class="form-control") }}
+                        </div>
+                        <div class="input-group mb-4"><span class="input-group-text">Số lượng</span>
+                          {{ form.like(class="form-control", id="input-like") }}
+                        </div>
+                        
+                        <div class="input-group mb-4"><span class="input-group-text">Họ tên</span>
+                            {{ form.name(class="form-control") }}
+                        </div>
+                        <div class="input-group mb-3"><span class="input-group-text">Thời gian (ngay)</span>
+                          {{ form.time(class="form-control", id="input-time") }}
+                        </div>
+                        <div class="form-check">
+                          {{ form.like_emotion(class="form-check-input", id="flexCheckDefault") }}
+                          <label class="form-check-label" for="flexCheckDefault">like</label>
+                        </div>
+                        <div class="form-check">
+                          {{ form.haha_emotion(class="form-check-input", id="flexCheckDefault") }}
+                          <label class="form-check-label" for="flexCheckDefault">haha</label>
+                        </div>
+                        <div class="form-check">
+                          {{ form.cry_emotion(class="form-check-input", id="flexCheckDefault") }}
+                          <label class="form-check-label" for="flexCheckDefault">khoc</label>
+                        </div>
+                        <div class="form-check">
+                          {{ form.love_emotion(class="form-check-input", id="flexCheckDefault") }}
+                          <label class="form-check-label" for="flexCheckDefault">tha tim</label>
+                        </div>
+                        <div class="form-check">
+                          {{ form.wow_emotion(class="form-check-input", id="flexCheckDefault") }}
+                          <label class="form-check-label" for="flexCheckDefault">wow</label>
+                        </div>
+                        <div class="form-check">
+                          {{ form.angry_emotion(class="form-check-input", id="flexCheckDefault") }}
+                          <label class="form-check-label" for="flexCheckDefault">gian du</label>
+                        </div>
+                        <div class="row">
+                          <div class="col-6">
+                            <button class="btn btn-primary px-4" type="submit" name="addlike">buy</button>
+                          </div>
+                        </div>
+                </form> 
+                <p class="text-medium-emphasis">
+                  <a id="log"></a> Coin                      
+                </p>
+              </div>
+              <div class="tab-pane pt-1" role="tabpanel" id="active-vip-like">
+                <table class="table">
+                  <!-- <caption>List of users</caption> -->
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">facebook ID</th>
+                      <th scope="col">facebook name</th>
+                      <th scope="col">Thời gian (ngay)</th>
+                      <th scope="col">Số lượng</th>
+                      <th scope="col">Ngày hết hạn</th>
+                      <th scope="col">Post</th>
+                      <th scope="col">Loại like</th>
+                      <th scope="col">note</th>
+                      <th scope="col">update</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for vip in viplike %}
+                      {% if vip.status == 'Hoạt động' %}
+                        <tr>
+                          <th scope="row">{{vip['0']}}</th>
+                          <td>{{ vip.id }}</td>
+                          <td>{{ vip.name }}</td>
+                          <td>{{ vip.han }}</td>
+                          <td>{{ vip.likes}}</td>
+                          <td>{{ parse_date(vip.timeend) }}</td>
+                          <td>{{ render_template_string(vip.post) | safe }}</td>
+                          <td>{{ vip.type }}</td>
+                          <td>{{ vip.note }}</td>
+                          <td>
+                            <form role="form" method="post" action="">
+                    
+                              {{ update_form.hidden_tag() }} 
+                              {{ update_form.facebook_id(value=vip.id, hidden=True, readonly=True)}}
+                              <input class="form-control" id="facebook_id" type="text" value="{{ vip.id }}" hidden readonly>
+                              <div class="form-check">
+                                {{ update_form.like_emotion(class="form-check-input", id="flexCheckDefault") }}
+                                <label class="form-check-label" for="flexCheckDefault">like</label>
+                              </div>
+                              <div class="form-check">
+                                {{ update_form.haha_emotion(class="form-check-input", id="flexCheckDefault") }}
+                                <label class="form-check-label" for="flexCheckDefault">haha</label>
+                              </div>
+                              <div class="form-check">
+                                {{ update_form.cry_emotion(class="form-check-input", id="flexCheckDefault") }}
+                                <label class="form-check-label" for="flexCheckDefault">khoc</label>
+                              </div>
+                              <div class="form-check">
+                                {{ update_form.love_emotion(class="form-check-input", id="flexCheckDefault") }}
+                                <label class="form-check-label" for="flexCheckDefault">tha tim</label>
+                              </div>
+                              <div class="form-check">
+                                {{ update_form.wow_emotion(class="form-check-input", id="flexCheckDefault") }}
+                                <label class="form-check-label" for="flexCheckDefault">wow</label>
+                              </div>
+                              <div class="form-check">
+                                {{ update_form.angry_emotion(class="form-check-input", id="flexCheckDefault") }}
+                                <label class="form-check-label" for="flexCheckDefault">gian du</label>
+                              </div>
+                              <div class="row">
+                                <div class="col-6">
+                                  <button class="btn btn-primary px-4" type="submit" name="updatelike">update</button>
+                                </div>
+                              </div>
+                            </form>
+                          </td>
+                        </tr>
+                      {% endif %}
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <div class="tab-pane pt-1" role="tabpanel" id="disactive-vip-like">
+                <table class="table">
+                  <!-- <caption>List of users</caption> -->
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">facebook ID</th>
+                      <th scope="col">facebook name</th>
+                      <th scope="col">Thời gian (ngay)</th>
+                      <th scope="col">Số lượng</th>
+                      <th scope="col">Ngày hết hạn</th>
+                      <th scope="col">Post</th>
+                      <th scope="col">loai like</th>
+                      <th scope="col">note</th>
+                      <th scope="col">update</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for vip in viplike %}
+                      {% if vip.status != 'Hoạt động' %}
+                        <tr>
+                          <th scope="row">{{vip['0']}}</th>
+                          <td>{{ vip.id }}</td>
+                          <td>{{ vip.name }}</td>
+                          <td>{{ vip.han }}</td>
+                          <td>{{ vip.likes}}</td>
+                          <td>{{ parse_date(vip.timeend) }}</td>
+                          <td>{{ render_template_string(vip.post) | safe }}</td>
+                          <td>{{ vip.type }}</td>
+                          <td>{{ vip.note }}</td>
+                          <td>
+                            <form role="form" method="post" action="">
+                    
+                              {{ update_form_extend.hidden_tag() }} 
+                              {{ update_form_extend.facebook_id(value=vip.id, hidden=True, readonly=True)}}
+                              {{ update_form_extend.like(value=vip.likes, hidden=True, readonly=True)}}
+                              <div class="input-group mb-4"><span class="input-group-text">Thời gian (ngay)</span>
+                                {{ update_form_extend.time() }}
+                              </div>
+                              <div class="row">
+                                <div class="col-6">
+                                  <button class="btn btn-primary px-4" type="submit" name="updatelikeextend">update</button>
+                                </div>
+                              </div>
+                            </form>
+                          </td>
+                        </tr>
+                      {% endif %}
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+<script type = "text/javascript" src = "/static/assets/js/utils.js" ></script>
+{% endblock javascripts %}

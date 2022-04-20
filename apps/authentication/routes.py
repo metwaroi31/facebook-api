@@ -14,7 +14,7 @@ from apps import db, login_manager
 from apps.authentication import blueprint
 from apps.authentication.forms import LoginForm, CreateAccountForm
 from apps.authentication.models import Users
-from apps.authentication.token import generate_confirmation_token, confirm_token
+# from apps.authentication.token import generate_confirmation_token, confirm_token
 from apps.authentication.util import verify_pass, send_email
 from apps.google_service.authentication import *
 import datetime
@@ -119,82 +119,82 @@ def logout():
     return redirect(url_for('authentication_blueprint.login'))
 
 
-@blueprint.route('/google/login')
-@no_cache
-def login_google():
+# @blueprint.route('/google/login')
+# @no_cache
+# def login_google():
 
-    session = OAuth2Session(CLIENT_ID, CLIENT_SECRET,
-                            scope=AUTHORIZATION_SCOPE,
-                            redirect_uri=AUTH_REDIRECT_URI)
+#     session = OAuth2Session(CLIENT_ID, CLIENT_SECRET,
+#                             scope=AUTHORIZATION_SCOPE,
+#                             redirect_uri=AUTH_REDIRECT_URI)
   
-    uri, state = session.authorization_url(AUTHORIZATION_URL)
-    print (uri)
-    flask.session[AUTH_STATE_KEY] = state
-    flask.session.permanent = True
+#     uri, state = session.authorization_url(AUTHORIZATION_URL)
+#     print (uri)
+#     flask.session[AUTH_STATE_KEY] = state
+#     flask.session.permanent = True
 
-    return flask.redirect(uri, code=302)
+#     return flask.redirect(uri, code=302)
 
-@blueprint.route('/google/auth')
-@no_cache
-def google_auth_redirect():
-    req_state = flask.request.args.get('state', default=None, type=None)
+# @blueprint.route('/google/auth')
+# @no_cache
+# def google_auth_redirect():
+#     req_state = flask.request.args.get('state', default=None, type=None)
 
-    if req_state != flask.session[AUTH_STATE_KEY]:
-        response = flask.make_response('Invalid state parameter', 401)
-        return response
-    print (CLIENT_ID, CLIENT_SECRET)
-    session = OAuth2Session(CLIENT_ID, CLIENT_SECRET,
-                            scope=AUTHORIZATION_SCOPE,
-                            state=flask.session[AUTH_STATE_KEY],
-                            redirect_uri=AUTH_REDIRECT_URI)
+#     if req_state != flask.session[AUTH_STATE_KEY]:
+#         response = flask.make_response('Invalid state parameter', 401)
+#         return response
+#     print (CLIENT_ID, CLIENT_SECRET)
+#     session = OAuth2Session(CLIENT_ID, CLIENT_SECRET,
+#                             scope=AUTHORIZATION_SCOPE,
+#                             state=flask.session[AUTH_STATE_KEY],
+#                             redirect_uri=AUTH_REDIRECT_URI)
 
-    oauth2_tokens = session.fetch_access_token(
-                        ACCESS_TOKEN_URI,            
-                        authorization_response=flask.request.url)
-    user_info = get_user_info()
-    user_to_register = {
-        "email" : user_info['email'],
-        "username" : user_info['email'],
-        "password" : user_info['id'],
-    }
-    user = Users.query.filter_by(username=user_to_register['username']).first()
+#     oauth2_tokens = session.fetch_access_token(
+#                         ACCESS_TOKEN_URI,            
+#                         authorization_response=flask.request.url)
+#     user_info = get_user_info()
+#     user_to_register = {
+#         "email" : user_info['email'],
+#         "username" : user_info['email'],
+#         "password" : user_info['id'],
+#     }
+#     user = Users.query.filter_by(username=user_to_register['username']).first()
         
-        # Check the password
-    if user and user.confirmed:
-            print ("run")
-            login_user(user)
-            return redirect(url_for('authentication_blueprint.route_default'))
-    else :
-        user = Users(**user_to_register)
-        # user.confirmed = True
-        # user.confirmed_on = datetime.datetime.now()
-        db.session.add(user)
-        db.session.commit()
-    login_user(user)
-    if not current_user.is_authenticated:
-        return render_template('accounts/login.html',
-                               form=login_form)
+#         # Check the password
+#     if user and user.confirmed:
+#             print ("run")
+#             login_user(user)
+#             return redirect(url_for('authentication_blueprint.route_default'))
+#     else :
+#         user = Users(**user_to_register)
+#         # user.confirmed = True
+#         # user.confirmed_on = datetime.datetime.now()
+#         db.session.add(user)
+#         db.session.commit()
+#     login_user(user)
+#     if not current_user.is_authenticated:
+#         return render_template('accounts/login.html',
+#                                form=login_form)
 
-    # create user here
-    return flask.redirect(BASE_URI, code=302)
+#     # create user here
+#     return flask.redirect(BASE_URI, code=302)
 
-@blueprint.route('/confirm/<token>')
-def confirm_email(token):
-    try:
-        email = confirm_token(token)
-    except:
-        flash('The confirmation link is invalid or has expired.', 'danger')
-    user = Users.query.filter_by(email=email).first_or_404()
-    # user.confirmed = True
-    if user.confirmed:
-        redirect(url_for('authentication_blueprint.login'))
-    else:
-        # user.confirmed = True
-        # user.confirmed_on = datetime.datetime.now()
-        db.session.add(user)
-        db.session.commit()
-        redirect(url_for('authentication_blueprint.login'))
-    return redirect(url_for('authentication_blueprint.login'))
+# @blueprint.route('/confirm/<token>')
+# def confirm_email(token):
+#     try:
+#         email = confirm_token(token)
+#     except:
+#         flash('The confirmation link is invalid or has expired.', 'danger')
+#     user = Users.query.filter_by(email=email).first_or_404()
+#     # user.confirmed = True
+#     if user.confirmed:
+#         redirect(url_for('authentication_blueprint.login'))
+#     else:
+#         # user.confirmed = True
+#         # user.confirmed_on = datetime.datetime.now()
+#         db.session.add(user)
+#         db.session.commit()
+#         redirect(url_for('authentication_blueprint.login'))
+#     return redirect(url_for('authentication_blueprint.login'))
 
 # Errors
 

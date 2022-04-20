@@ -6,7 +6,7 @@ Copyright (c) 2019 - present AppSeed.us
 from flask import Blueprint
 
 blueprint = Blueprint(
-    'facebook_api_blueprint',
+    'facebook_api_buff_blueprint',
     __name__,
     url_prefix=''
 )

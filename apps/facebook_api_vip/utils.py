@@ -1,16 +1,13 @@
 import requests
 from apps.config import Config
-
+import datetime
 # api get vip like theo ctv_username
 def getviplike(username):
     url = Config.FACEBOOK_API
     apikey = Config.FACEBOOK_API_KEY
-    print (url, apikey)
     # data = {"eventType": "AAS_PORTAL_START", "data": {"uid": "hfe3hf45huf33545", "aid": "1", "vid": "1"}}
     data = {'key': apikey, 'useradd': username, 'act': 'get'}
-
     response = requests.post(url, data=data)
-    print (response.text)
     return response.text
 
 # api add vip like
@@ -68,7 +65,7 @@ def addcmt(id_post, name, han, limit, ghichu, noidung, lenhdung):
 
 # api get vip cmt
 def getvipcmt(username):
-    url = Config.FACEBOOK_API
+    url = Config.FACEBOOK_API_CMT
     apikey = Config.FACEBOOK_API_KEY
     data = {'key': apikey, 'act': 'get', 'useradd': username}
     response = requests.post(url, data=data)
@@ -91,17 +88,26 @@ def getchitetmat(id_post):
     return response.text
 
 # api chinh sua cmt
-def editcmt(id_post, noidung, sticker, linkanh, lenhdung):
-    url = Config.FACEBOOK_API
+def editcmt(id_post, noidung, linkanh, lenhdung):
+    url = Config.FACEBOOK_API_CMT
     apikey = Config.FACEBOOK_API_KEY
     data = {'key': apikey, 'act': 'edit', 'id': id_post, \
-                    'sticker': sticker, 'linkanh': linkanh, 'noidung': noidung, 'lenhdung': lenhdung}
+                    'linkanh': linkanh, 'noidung': noidung, 'lenhdung': lenhdung}
+    response = requests.post(url, data=data)
+    return response.text
+
+
+# api gia han like
+def giahanlike(id_post, hanthue):
+    url = Config.FACEBOOK_API
+    apikey = Config.FACEBOOK_API_KEY
+    data = {'key': apikey, 'act': 'giahan', 'id': id_post, 'hanthue': hanthue}
     response = requests.post(url, data=data)
     return response.text
 
 # api gia han cmt
-def giahan(id_post, hanthue):
-    url = Config.FACEBOOK_API
+def giahancmt(id_post, hanthue):
+    url = Config.FACEBOOK_API_CMT
     apikey = Config.FACEBOOK_API_KEY
     data = {'key': apikey, 'act': 'giahan', 'id': id_post, 'hanthue': hanthue}
     response = requests.post(url, data=data)
@@ -126,7 +132,7 @@ def addlive(id_post, name, han, limit, ghichu):
 
 # api get live theo ctv_username
 def getvipmat(username):
-    url = Config.FACEBOOK_API
+    url = Config.FACEBOOK_API_MAT
     apikey = Config.FACEBOOK_API_KEY
     data = {'key': apikey, 'act': 'get', 'useradd': username}
     response = requests.post(url, data=data)
@@ -139,3 +145,30 @@ def dellive(id_post):
     data = {'key': apikey, 'act': 'del', 'useradd': username}
     response = requests.post(url, data=data)
     return response.text
+
+def parse_emotion(request_data):
+    return_emotions = ''
+    if 'like_emotion' in request_data:
+        return_emotions = return_emotions + 'LIKE' + '|'
+    if 'haha_emotion' in request_data:
+        return_emotions = return_emotions + 'HAHA' + '|'
+    if 'wow_emotion' in request_data:
+        return_emotions = return_emotions + 'WOW' + '|'
+    if 'cry_emotion' in request_data:
+        return_emotions = return_emotions + 'Buồn' + '|'
+    if 'angry_emotion' in request_data:
+        return_emotions = return_emotions + 'Phẫn nộ' + '|'
+    if 'love_emotion' in request_data:
+        return_emotions = return_emotions + 'LOVE' + '|'
+    return_emotions = return_emotions[0 : (len(return_emotions) - 1)]
+    return return_emotions
+
+def parse_date(date_int):
+    # when passing from view date_int is string
+    date_int = int(date_int)
+    timestamp = datetime.datetime.fromtimestamp(date_int)
+    return timestamp.strftime('%Y-%m-%d')
+
+def parse_template(template_string):
+    template_string = template_string.replace('\\', '')
+    return template_string

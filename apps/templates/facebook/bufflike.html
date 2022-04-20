@@ -1,0 +1,78 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Forms Control {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="body flex-grow-1 px-3">
+    <div class="container-lg">
+      <div class="callout callout-info bg-white">
+        Giá: 20 Coin / Like
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-4">
+            <p class="text-medium-emphasis">
+                {% if msg %}
+                  {{ msg | safe }}  
+                {% endif %}                      
+            </p>
+            <ul class="nav nav-tabs" role="tablist">
+              <li class="nav-item"><a class="nav-link active" data-coreui-toggle="tab" href="#add-comment" role="tab">
+                  <svg class="icon me-2">
+                    <use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-media-play"></use>
+                  </svg>Tạo đơn hàng mới</a>
+              </li>
+              <!-- <li class="nav-item"><a class="nav-link" data-coreui-toggle="tab" href="#active-vip-comment" role="tab">
+                  <svg class="icon me-2">
+                    <use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-media-play"></use>
+                  </svg>Danh sách VIP</a>
+              </li>
+              <li class="nav-item"><a class="nav-link" data-coreui-toggle="tab" href="#disactive-vip-like" role="tab">
+                  <svg class="icon me-2">
+                    <use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-media-play"></use>
+                  </svg>Danh sách VIP hết hạn</a>
+              </li> -->
+            </ul>
+            <div class="tab-content rounded-bottom">
+              <div class="tab-pane p-3 active preview" role="tabpanel" id="add-comment">
+                  <form role="form" method="post" action="">
+                  
+                  {{ form.hidden_tag() }} 
+                      <div class="input-group mb-3"><span class="input-group-text">ID bài viết: </span>
+                          {{ form.facebook_id(class="form-control") }}
+                      </div>
+                      <div class="input-group mb-4"><span class="input-group-text">Loại Like </span>
+                          {{ form.subcategory_like(class="form-control", id="input-type") }}
+                      </div>
+                      <div class="input-group mb-3"><span class="input-group-text">Số lượng:</span>
+                        {{ form.like(class="form-control", id="input-like") }}
+                      </div>
+                      <!-- <div class="input-group mb-3"><span class="input-group-text" id="basic-addon1">@</span>
+                          <input class="form-control" type="text" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                      </div> -->
+                      <div class="row">
+                        <div class="col-6">
+                          <button class="btn btn-primary px-4" type="submit" name="addmat">buy</button>
+                        </div>
+                      </div>
+                  </form>
+              <p class="text-medium-emphasis">
+                <a id="log"></a> Coin                      
+              </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+{% endblock javascripts %}

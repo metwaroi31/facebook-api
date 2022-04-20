@@ -26,8 +26,8 @@ class Config(object):
     MAIL_USE_SSL = True
 
     # gmail authentication
-    MAIL_USERNAME = os.environ['APP_MAIL_USERNAME']
-    MAIL_PASSWORD = os.environ['APP_MAIL_PASSWORD']
+    # MAIL_USERNAME = os.environ['APP_MAIL_USERNAME']
+    # MAIL_PASSWORD = os.environ['APP_MAIL_PASSWORD']
 
     # mail accounts
     MAIL_DEFAULT_SENDER = 'from@example.com'
@@ -57,6 +57,7 @@ class Config(object):
     FACEBOOK_API = 'http://api.viplike.me/likenew.php'
     FACEBOOK_API_CMT = 'http://api.viplike.me/cmt.php'
     FACEBOOK_API_MAT = 'http://api.viplike.me/mat.php'
+    FACEBOOK_API_BUFF = 'http://api.viplike.me/buff.php'
 
 class ProductionConfig(Config):
     DEBUG = False
