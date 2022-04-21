@@ -16,3 +16,8 @@ class AddBuffLikeForm(FlaskForm):
     like = IntegerField()
     # like_emotion = BooleanField()
     # haha_emotion = BooleanField()
+
+class AddBuffSubForm(FlaskForm):
+    facebook_id = StringField('Facebook_id', id='facebook_id')
+    # subcategory_like = SelectField('', choices = [('like_v2', 'like_v2'), ('like_v6', 'like_v6')])
+    sub = IntegerField()

@@ -4,7 +4,7 @@ const inputType = document.getElementById('input-type');
 const log = document.getElementById('log');
 
 inputLike.addEventListener('change', calculateVipLikeOnLikeChange);
-inputTime.addEventListener('change', calculateVipLikeOnTimeChange);
+inputType.addEventListener('change', calculateVipLikeOnTimeChange);
 function calculateVipLikeOnLikeChange(e) {
     var valueType = inputType.value;
     console.log(valueType)

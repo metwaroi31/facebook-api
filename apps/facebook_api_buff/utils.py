@@ -3,7 +3,7 @@ from apps.config import Config
 import datetime
 
 # api add bufflike 
-def addbufflike(id_post, limit, ghichu, buff_type):
+def addbufflike(id_post, buff_type, limit, ghichu):
     url = Config.FACEBOOK_API_BUFF
     apikey = Config.FACEBOOK_API_KEY
     # 'key' => $apikey,
@@ -14,7 +14,37 @@ def addbufflike(id_post, limit, ghichu, buff_type):
     # 'type' => $type // loại like (like_v2, like_v6) tương ứng (20đ,40đ)
     data = {'key': apikey, 'id': id_post, 'act': 'buffLike', 'limit': limit, 'ghichu': ghichu, 'type': buff_type}
     response = requests.post(url, data=data)
+    print (response)
     return response.text
+# // api buff sub người dùng thật 50đ bảo hành 3 tháng
+# function addbuffsub($id,$limit,$ghichu,$apikey){
+#   $param = array(
+#     'key' => $apikey,
+#     'act'=> 'buffSub',
+#     'id' => $id,
+#     'limit' => $limit, // giới hạn like
+#     'ghichu' => $ghichu
+# 		);
+# 	$url = 'http://api.viplike.me/buff.php';
+# 	$ch = curl_init($url);
+# 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+# 	curl_setopt($ch, CURLOPT_POSTFIELDS, $param); 
+# 	$result = curl_exec($ch); 
+# 	curl_close($ch);   
+# 	return $result; 
+
+def addbuffsub(id_post, limit, ghichu):
+    url = Config.FACEBOOK_API_BUFF
+    apikey = Config.FACEBOOK_API_KEY
+    # 'key' => $apikey,
+    # 'act'=> 'buffLike',
+    # 'id' => $id,
+    # 'limit' => $limit, // giới hạn like
+    # 'ghichu' => $ghichu,
+    # 'type' => $type // loại like (like_v2, like_v6) tương ứng (20đ,40đ)
+    data = {'key': apikey, 'id': id_post, 'act': 'buffSub', 'limit': limit, 'ghichu': ghichu}
+    response = requests.post(url, data=data)
+    return response.text 
 
 def getbufflike():
     url = Config.FACEBOOK_API_BUFF
