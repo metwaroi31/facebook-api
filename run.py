@@ -46,6 +46,6 @@ if DEBUG:
 
 if __name__ == "__main__":
     try :
-        app.run(threaded=True)
+        app.run(use_reloader=True, threaded=True)
     except Exception as err:
         print (err)
