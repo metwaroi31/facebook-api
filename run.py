@@ -46,6 +46,6 @@ if DEBUG:
 
 if __name__ == "__main__":
     try :
-        app.run()
+        app.run(threaded=True)
     except Exception as err:
         print (err)
