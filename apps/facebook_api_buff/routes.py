@@ -43,14 +43,14 @@ def bufflike_view():
         result = json.loads(addbufflike(facebook_id, like_type, like, \
                                 username + 'da su dung dich vu nay'))
         # print (json.loads(result))
-        if result['status'] == 'error':
-            return render_template('facebook/bufflike.html', form=form, render_template_string=parse_template,\
-                                            parse_date=parse_date)
+        # if result['status'] == 'error':
+        #     return render_template('facebook/bufflike.html', form=form, render_template_string=parse_template,\
+        #                                     parse_date=parse_date)
 
         user.coin = user.coin - total_coin_to_pay
         db.session.commit()
 
-        return render_template('facebook/bufflike.html', form=form, render_template_string=parse_template,\
+        return render_template('facebook/bufflike.html', msg='thanh cong', form=form, render_template_string=parse_template,\
                                             parse_date=parse_date)
 
 @blueprint.route('/facebook/buff_sub', methods=['GET', 'POST'])
@@ -75,14 +75,13 @@ def buffsub_view():
         
         result = json.loads(addbufflike(facebook_id, like_type, like, \
                                 username + 'da su dung dich vu nay'))
-        print (result)
-        # print (json.loads(result))
-        if result['status'] == 'error':
-            return render_template('facebook/buffsub.html', form=form, render_template_string=parse_template,\
-                                            parse_date=parse_date)
-
+        # print (result)
+        # # print (json.loads(result))
+        # if result['status'] == 'error':
+        #     return render_template('facebook/buffsub.html', form=form, render_template_string=parse_template,\
+        #                                     parse_date=parse_date)
         user.coin = user.coin - total_coin_to_pay
         db.session.commit()
 
-        return render_template('facebook/buffsub.html', form=form, render_template_string=parse_template,\
+        return render_template('facebook/buffsub.html', msg='thanh cong', form=form, render_template_string=parse_template,\
                                             parse_date=parse_date)

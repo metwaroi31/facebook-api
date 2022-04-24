@@ -13,6 +13,7 @@ def addbufflike(id_post, buff_type, limit, ghichu):
     # 'ghichu' => $ghichu,
     # 'type' => $type // loại like (like_v2, like_v6) tương ứng (20đ,40đ)
     data = {'key': apikey, 'id': id_post, 'act': 'buffLike', 'limit': limit, 'ghichu': ghichu, 'type': buff_type}
+    print (data)
     response = requests.post(url, data=data)
     print (response)
     return response.text
