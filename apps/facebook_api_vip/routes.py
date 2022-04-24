@@ -25,6 +25,7 @@ def addlike_view():
     update_form_extend = UpdateLikeFormExtend(request.form)
     list_of_vip_like = ast.literal_eval(getviplike('ngocdinh95'))
     list_of_vip_like = list_of_vip_like['data']
+    list_of_vip_like = filter_list(list_of_vip_like, current_user.username)
     if request.method == 'GET':        
         return render_template('facebook/viplike.html', form=form, viplike=list_of_vip_like, \
                                                update_form=update_form, render_template_string=parse_template,\
@@ -59,7 +60,7 @@ def addlike_view():
         # Getting input from 
         emotion_input = ''
         facebook_id = request.form['facebook_id']
-        name = request.form['name']
+        name = request.form['name'] + "_" + username
         time = request.form['time']
         like = request.form['like']
         emotion_input = parse_emotion(request.form)
@@ -87,8 +88,7 @@ def addlike_view():
 @blueprint.route('/facebook/add_like/<facebook_id>')
 def dellike_view(facebook_id):
     result = json.loads(dellike(facebook_id))
-    print (result)
-    return redirect(url_for('facebook_api_blueprint.addlike_view'))
+    return redirect(url_for('facebook_api_vip_blueprint.addlike_view'))
 
 @blueprint.route('/facebook/add_comment', methods=['GET', 'POST'])
 def addcomment_view():
@@ -97,7 +97,7 @@ def addcomment_view():
     update_form_extend = UpdateCommentFormExtend(request.form)
     list_of_vip_comment = ast.literal_eval(getvipcmt('ngocdinh95'))
     list_of_vip_comment = list_of_vip_comment['data']
-    print (list_of_vip_comment)
+    list_of_vip_comment = filter_list(list_of_vip_comment, current_user.username)
     if request.method == 'GET':        
         return render_template('facebook/vipcomment.html', form=form, render_template_string=parse_template,\
                                             update_form=update_form, parse_date=parse_date, viplike=list_of_vip_comment, \
@@ -126,7 +126,7 @@ def addcomment_view():
         user = Users.query.filter_by(username=username).first()
 
         facebook_id = request.form['facebook_id']
-        name = request.form['name']
+        name = request.form['name'] + "_" + username
         time = request.form['time']
         comments = request.form['comments']
         content = request.form['content']
@@ -155,6 +155,11 @@ def addcomment_view():
                                             update_form=update_form, parse_date=parse_date, viplike=list_of_vip_comment, \
                                                 update_form_extend=update_form_extend, render_template_string=parse_template)
 
+@blueprint.route('/facebook/add_comment/<facebook_id>')
+def delcmt_view(facebook_id):
+    result = json.loads(delcmt(facebook_id))
+    return redirect(url_for('facebook_api_vip_blueprint.addcmt_view'))
+
 @blueprint.route('/facebook/add_live', methods=['GET', 'POST'])
 def addlive_view():
     form = AddMatForm(request.form)
@@ -162,7 +167,7 @@ def addlive_view():
     # update_form_extend = UpdateCommentFormExtend(request.form)
     list_of_vip_mat = ast.literal_eval(getvipmat('ngocdinh95'))
     list_of_vip_mat = list_of_vip_mat['data']
-    print (list_of_vip_mat)
+    list_of_vip_mat = filter_list(list_of_vip_mat, current_user.username)
     if request.method == 'GET':        
         return render_template('facebook/vipmat.html', form=form, render_template_string=parse_template,\
                                             parse_date=parse_date, viplike=list_of_vip_mat)
@@ -171,7 +176,7 @@ def addlive_view():
         user = Users.query.filter_by(username=username).first()
 
         facebook_id = request.form['facebook_id']
-        name = request.form['name']
+        name = request.form['name'] + "_" + username
         time = request.form['time']
         mat = request.form['mat']
     
@@ -194,3 +199,9 @@ def addlive_view():
 
         return render_template('facebook/vipmat.html', form=form, render_template_string=parse_template,\
                                             parse_date=parse_date, viplike=list_of_vip_mat)
+
+@blueprint.route('/facebook/add_live/<facebook_id>')
+def dellive_view(facebook_id):
+    result = json.loads(dellive(facebook_id, 'ngocdinh95'))
+    print (result)
+    return redirect(url_for('facebook_api_vip_blueprint.addlike_view'))

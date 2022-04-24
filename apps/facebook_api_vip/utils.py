@@ -139,7 +139,7 @@ def getvipmat(username):
     return response.text
 
 # api xoa live
-def dellive(id_post):
+def dellive(id_post, username):
     url = Config.FACEBOOK_API
     apikey = Config.FACEBOOK_API_KEY
     data = {'key': apikey, 'act': 'del', 'useradd': username}
@@ -172,3 +172,12 @@ def parse_date(date_int):
 def parse_template(template_string):
     template_string = template_string.replace('\\', '')
     return template_string
+
+def filter_list(vip_list, username):
+    return_vip_list = []
+    for vip in vip_list:
+        belonged_to_user = vip['name'].find(username)
+        if belonged_to_user != -1:
+            vip['name'] = vip['name'].split('_') [0]
+            return_vip_list.append(vip)
+    return return_vip_list

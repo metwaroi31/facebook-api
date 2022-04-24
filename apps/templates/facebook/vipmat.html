@@ -116,6 +116,7 @@
                       <th scope="col">Ngày hết hạn</th>
                       <th scope="col">Post</th>
                       <th scope="col">note</th>
+                      <th scope="col">delete</th>
                       <!-- <th scope="col">update</th>   -->
                     </tr>
                   </thead>
@@ -132,6 +133,7 @@
                           <td>{{ render_template_string(vip.post) | safe }}</td>
                           <td>{{ vip.type }}</td>
                           <td>{{ vip.note }}</td>
+                          <td><a href="{{url_for('facebook_api_vip_blueprint.dellive_view', facebook_id=vip.id)}}" >delete</a></td>
                         </tr>
                       {% endif %}
                     {% endfor %}

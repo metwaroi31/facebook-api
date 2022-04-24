@@ -176,7 +176,8 @@
                       <th scope="col">Post</th>
                       <th scope="col">loai like</th>
                       <th scope="col">note</th>
-                      <th scope="col">update</th>
+                      <!-- <th scope="col">update</th> -->
+                      <th scope="col">delete</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -192,7 +193,8 @@
                           <td>{{ render_template_string(vip.post) | safe }}</td>
                           <td>{{ vip.type }}</td>
                           <td>{{ vip.note }}</td>
-                          <td>
+                          <td><a href="{{url_for('facebook_api_vip_blueprint.dellike_view', facebook_id=vip.id)}}" >delete</a></td>
+                          <!-- <td>
                             <form role="form" method="post" action="">
                     
                               {{ update_form_extend.hidden_tag() }} 
@@ -207,7 +209,8 @@
                                 </div>
                               </div>
                             </form>
-                          </td>
+                          </td> -->
+                          <td></td>
                         </tr>
                       {% endif %}
                     {% endfor %}
