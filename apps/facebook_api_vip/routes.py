@@ -158,7 +158,8 @@ def addcomment_view():
 @blueprint.route('/facebook/add_comment/<facebook_id>')
 def delcmt_view(facebook_id):
     result = json.loads(delcmt(facebook_id))
-    return redirect(url_for('facebook_api_vip_blueprint.addcmt_view'))
+    print (result)
+    return redirect(url_for('facebook_api_vip_blueprint.addcomment_view'))
 
 @blueprint.route('/facebook/add_live', methods=['GET', 'POST'])
 def addlive_view():
