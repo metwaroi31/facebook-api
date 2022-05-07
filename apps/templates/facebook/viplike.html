@@ -27,10 +27,10 @@
         <div class="col-auto my-auto">
           <div class="h-100">
             <h5 class="mb-1">
-              Alec Thompson
+              Thành tiền:
             </h5>
             <p class="mb-0 font-weight-bold text-sm">
-              CEO / Co-Founder
+              <a id="log"></a> Coin   
             </p>
           </div>
         </div>
@@ -117,11 +117,11 @@
               </div>
               <label>Thời gian:</label>
               <div class="mb-3">
-                {{ form.time(class="form-control") }}
+                {{ form.time(class="form-control", id="input-like") }}
               </div>
               <label>Số lượng:</label>
               <div class="mb-3">
-                {{ form.like(class="form-control") }}
+                {{ form.like(class="form-control", id="input-time") }}
               </div>
               <!-- <label>Password</label>
               <div class="mb-3">
@@ -305,4 +305,6 @@
 {% endblock content %}
 
 <!-- Specific JS goes HERE --> 
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+<script type="text/javascript" src="/static/assets/js/utils.js" ></script>
+{% endblock javascripts %}

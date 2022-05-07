@@ -28,10 +28,10 @@
         <div class="col-auto my-auto">
           <div class="h-100">
             <h5 class="mb-1">
-              Alec Thompson
+              Thành tiền: 
             </h5>
             <p class="mb-0 font-weight-bold text-sm">
-              CEO / Co-Founder
+              <a id="log"></a> Coin   
             </p>
           </div>
         </div>
@@ -118,11 +118,11 @@
               </div>
               <label>Thời gian:</label>
               <div class="mb-3">
-                {{ form.time(class="form-control") }}
+                {{ form.time(class="form-control", id="input-time") }}
               </div>
               <label>Số lượng:</label>
               <div class="mb-3">
-                {{ form.comments(class="form-control") }}
+                {{ form.comments(class="form-control", id="input-like") }}
               </div>
               <label>Lệnh dừng:</label>
               <div class="mb-3">
@@ -130,7 +130,7 @@
               </div>
               <label>Nội dung:</label>
               <div class="mb-3">
-                {{ form.content(class="form-control") }}
+                {{ form.content(class="form-control", style="height: 444px;") }}
               </div>
               <label>hinh anh:</label>
               <div class="mb-3">
@@ -271,4 +271,6 @@
 {% endblock content %}
 
 <!-- Specific JS goes HERE --> 
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+<script type="text/javascript" src="/static/assets/js/utils_vipcmt.js" ></script>
+{% endblock javascripts %}

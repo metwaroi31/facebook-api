@@ -27,10 +27,10 @@
         <div class="col-auto my-auto">
           <div class="h-100">
             <h5 class="mb-1">
-              Alec Thompson
+              Thành tiền: 
             </h5>
             <p class="mb-0 font-weight-bold text-sm">
-              CEO / Co-Founder
+              <a id="log"></a> Coin   
             </p>
           </div>
         </div>
@@ -113,11 +113,11 @@
               </div>
               <label>Loại Like</label>
               <div class="mb-3">
-                {{ form.subcategory_like(class="form-control") }}
+                {{ form.subcategory_like(class="form-control", id="input-type") }}
               </div>
               <label>Số lượng:</label>
               <div class="mb-3">
-                {{ form.like(class="form-control") }}
+                {{ form.like(class="form-control", id="input-like") }}
               </div>
               <div class="text-center">
                 <button type="submit" name="addlike" class="btn bg-gradient-info w-100 mt-4 mb-0">Thêm mới</button>
@@ -132,4 +132,6 @@
 {% endblock content %}
 
 <!-- Specific JS goes HERE --> 
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+<script type="text/javascript" src="/static/assets/js/utils_bufflike.js" ></script>
+{% endblock javascripts %}

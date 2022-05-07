@@ -4,7 +4,7 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, IntegerField, BooleanField
+from wtforms import StringField, PasswordField, IntegerField, BooleanField, TextAreaField
 from wtforms.validators import Email, DataRequired
 from wtforms import validators
 # login and registration
@@ -44,7 +44,7 @@ class AddCommentForm(FlaskForm):
     name = StringField('name')
     time = IntegerField()
     comments = IntegerField()
-    content = StringField('content')
+    content = TextAreaField('content')
     image_url = StringField('image')
     stop_command = StringField('stop_command')
 
