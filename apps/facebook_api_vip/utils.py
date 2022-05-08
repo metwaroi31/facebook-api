@@ -1,6 +1,7 @@
 import requests
 from apps.config import Config
 import datetime
+
 # api get vip like theo ctv_username
 def getviplike(username):
     url = Config.FACEBOOK_API

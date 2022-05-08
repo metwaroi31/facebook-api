@@ -18,7 +18,7 @@ def register_extensions(app):
 
 
 def register_blueprints(app):
-    for module_name in ('authentication', 'home', 'google_service', 'facebook_api_buff', 'facebook_api_vip', 'admin'):
+    for module_name in ('authentication', 'home', 'google_service', 'facebook_api_buff', 'facebook_api_vip', 'admin', 'facebook_support'):
         module = import_module('apps.{}.routes'.format(module_name))
         app.register_blueprint(module.blueprint)
 

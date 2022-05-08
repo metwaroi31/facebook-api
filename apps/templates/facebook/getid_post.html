@@ -101,22 +101,22 @@
         <div class="card-body">
             <form role="form text-left" method="post" action="">
               {{ form.hidden_tag() }}
-              <label>ID bài viết: </label>
+              <label>ID bài viết:</label>
               <div class="mb-3">
-                {{ form.facebook_id(class="form-control") }}
-              </div>
-              <label>Số lượng:</label>
-              <div class="mb-3">
-                {{ form.sub(class="form-control", id="input-like") }}
+                {{ form.post_url(class="form-control") }}
               </div>
               <h5 class="mb-1">
-                Thành tiền:
+                ID bài viết:
               </h5>
               <p class="mb-0 font-weight-bold text-sm">
-                <a id="log"></a> Coin   
+                <a id="log"> 
+                    {% if msg %}
+                      {{ msg | safe }}  
+                    {% endif %}  
+                </a> 
               </p>
               <div class="text-center">
-                <button type="submit" name="addlike" class="btn bg-gradient-info w-100 mt-4 mb-0">Thêm mới</button>
+                <button type="submit" name="addlike" class="btn bg-gradient-info w-100 mt-4 mb-0">Lay ID</button>
               </div>
             </form>
           </div>
@@ -126,7 +126,8 @@
 </div>
 
 {% endblock content %}
+
 <!-- Specific JS goes HERE --> 
 {% block javascripts %}
-<script type="text/javascript" src="/static/assets/js/utils_buffsub.js" ></script>
+<script type="text/javascript" src="/static/assets/js/utils_bufflike.js" ></script>
 {% endblock javascripts %}
