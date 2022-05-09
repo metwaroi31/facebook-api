@@ -101,21 +101,10 @@
         <div class="card-body">
             <form role="form text-left" method="post" action="">
               {{ form.hidden_tag() }}
-              <label>ID trang cá nhân:</label>
-              
+              <label>Xin ban hay vao day de lay id trang ca nhan</label>
               <div class="mb-3">
-                {{ form.facebook_url(class="form-control") }}
+                https://id.atpsoftware.vn/
               </div>
-              <h5 class="mb-1">
-                ID trang cá nhân:
-              </h5>
-              <p class="mb-0 font-weight-bold text-sm">
-                <a id="log">
-                  {% if msg %}
-                    {{ msg | safe }}  
-                  {% endif %}  
-                </a>    
-              </p>
               <div class="text-center">
                 <button type="submit" name="addlike" class="btn bg-gradient-info w-100 mt-4 mb-0">Thêm mới</button>
               </div>

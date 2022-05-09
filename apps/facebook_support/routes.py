@@ -25,6 +25,7 @@ def get_id_profile_view():
     if request.method == 'POST':
         facebook_id = request.form['facebook_url']
         facebook_id = get_facebook_id(facebook_id)
+        print (facebook_id)
         return render_template('facebook/getid_profile.html', msg=facebook_id, form=form)
 
 @blueprint.route('/facebook/support_get_post', methods=['GET', 'POST'])
