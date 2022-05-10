@@ -1,6 +1,6 @@
 from urllib.parse import urlparse, parse_qs
 import requests
-from pyfacebook import GraphAPI
+# from pyfacebook import GraphAPI
 
 def get_facebook_id(fb_url):
     URL = "https://id.atpsoftware.vn/"
