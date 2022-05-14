@@ -104,10 +104,7 @@ def register():
         # subject = "Please confirm your email"
         # send_email(user.email, subject, html)
 
-        return render_template('accounts/login.html',
-                               msg='User created, go to login page',
-                               success=True,
-                               form=create_account_form)
+        return redirect(url_for('authentication_blueprint.login'))
 
     else:
         return render_template('accounts/register.html', form=create_account_form)
