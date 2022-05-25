@@ -6,8 +6,7 @@ from apps.authentication.models import Users
 from apps.facebook_api_vip.forms import *
 from flask_login import (
     current_user,
-    login_user,
-    logout_user
+    login_required
 )
 import json
 from apps import db, login_manager
@@ -18,6 +17,7 @@ import ast
 #     return jsonify(result)
 
 @blueprint.route('/facebook/add_like', methods=['GET', 'POST'])
+@login_required
 def addlike_view():
     # declare necessary variables for template
     form = AddLikeForm(request.form)
@@ -86,11 +86,13 @@ def addlike_view():
                                     parse_date=parse_date, update_form_extend=update_form_extend)
 
 @blueprint.route('/facebook/add_like/<facebook_id>')
+@login_required
 def dellike_view(facebook_id):
     result = json.loads(dellike(facebook_id))
     return redirect(url_for('facebook_api_vip_blueprint.addlike_view'))
 
 @blueprint.route('/facebook/add_comment', methods=['GET', 'POST'])
+@login_required
 def addcomment_view():
     form = AddCommentForm(request.form)
     update_form = UpdateCommentForm(request.form)
@@ -156,12 +158,14 @@ def addcomment_view():
                                                 update_form_extend=update_form_extend, render_template_string=parse_template)
 
 @blueprint.route('/facebook/add_comment/<facebook_id>')
+@login_required
 def delcmt_view(facebook_id):
     result = json.loads(delcmt(facebook_id))
     print (result)
     return redirect(url_for('facebook_api_vip_blueprint.addcomment_view'))
 
 @blueprint.route('/facebook/add_live', methods=['GET', 'POST'])
+@login_required
 def addlive_view():
     form = AddMatForm(request.form)
     # update_form = UpdateCommentForm(request.form)
@@ -202,6 +206,7 @@ def addlive_view():
                                             parse_date=parse_date, viplike=list_of_vip_mat)
 
 @blueprint.route('/facebook/add_live/<facebook_id>')
+@login_required
 def dellive_view(facebook_id):
     result = json.loads(dellive(facebook_id, 'ngocdinh95'))
     print (result)

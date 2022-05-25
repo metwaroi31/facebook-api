@@ -21,6 +21,8 @@ class Users(db.Model, UserMixin):
     # confirmed_on = db.Column(db.DateTime, nullable=True)
     is_admin = db.Column(db.Boolean, default=False)
     coin = db.Column(db.Integer, default=0)
+    phone_number = db.Column(db.Integer)
+    # momo_token = db.Column(db.String(64), default=False)
     def __init__(self, **kwargs):
         for property, value in kwargs.items():
             # depending on whether value is an iterable or not, we must

@@ -10,6 +10,7 @@ from flask_mail import Mail
 from apps.config import config_dict
 from apps import create_app, db
 from apps.admin.util import create_admin
+from apps.payment_momo.utils import pay_momo
 import click
 # WARNING: Don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
@@ -27,6 +28,10 @@ except KeyError:
 
 app = create_app(app_config)
 Migrate(app, db)
+
+@app.cli.command("pay-user")
+def pay_user():
+    pay_momo()
 
 @app.cli.command("create-user")
 @click.argument("username")

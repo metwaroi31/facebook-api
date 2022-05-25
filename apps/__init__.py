@@ -7,21 +7,18 @@ from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from importlib import import_module
-
 db = SQLAlchemy()
 login_manager = LoginManager()
 app = Flask(__name__)
-
 def register_extensions(app):
     db.init_app(app)
     login_manager.init_app(app)
 
 
 def register_blueprints(app):
-    for module_name in ('authentication', 'home', 'google_service', 'facebook_api_buff', 'facebook_api_vip', 'admin', 'facebook_support'):
+    for module_name in ('authentication', 'home', 'google_service', 'facebook_api_buff', 'facebook_api_vip', 'admin', 'facebook_support', 'payment_momo'):
         module = import_module('apps.{}.routes'.format(module_name))
         app.register_blueprint(module.blueprint)
-
 
 def configure_database(app):
 
