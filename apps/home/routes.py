@@ -26,7 +26,7 @@ def index():
 #     print ("going to admin page")
 #     return render_template('home/index_admin.html', segment='index')
 @blueprint.route('/<template>')
-@login_required
+# @login_required
 def route_template(template):
 
     try:
@@ -43,7 +43,8 @@ def route_template(template):
     except TemplateNotFound:
         return render_template('home/page-404.html'), 404
 
-    except:
+    except Exception as e:
+        print (e)
         return render_template('home/page-500.html'), 500
 
 
