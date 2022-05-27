@@ -13,7 +13,7 @@ import json
 from apps import db, login_manager
 import ast
 
-@blueprint.route('/facebook/buff_like', methods=['GET', 'POST'])
+@blueprint.route('/buff_like', methods=['GET', 'POST'])
 def bufflike_view():
     form = AddBuffLikeForm(request.form)
     # update_form = UpdateCommentForm(request.form)
@@ -53,7 +53,7 @@ def bufflike_view():
         return render_template('facebook/bufflike.html', msg='thanh cong', form=form, render_template_string=parse_template,\
                                             parse_date=parse_date)
 
-@blueprint.route('/facebook/buff_sub', methods=['GET', 'POST'])
+@blueprint.route('/buff_sub', methods=['GET', 'POST'])
 def buffsub_view():
     form = AddBuffSubForm(request.form)
     if request.method == 'GET':        

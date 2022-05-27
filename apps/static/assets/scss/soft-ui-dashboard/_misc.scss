@@ -280,6 +280,20 @@ hr.horizontal {
   background-size: cover;
 }
 
+// Overflow directional
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+.overflow-y-hidden {
+  overflow-y: hidden;
+}
+.overflow-x-scroll {
+  overflow-x: scroll;
+}
+.overflow-y-scroll {
+  overflow-y: scroll;
+}
+
 // Mask Class
 .mask {
   position: $mask-position;

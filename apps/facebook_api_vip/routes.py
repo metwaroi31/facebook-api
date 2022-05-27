@@ -16,7 +16,7 @@ import ast
 #     result = getviplike('ngocdinh95')
 #     return jsonify(result)
 
-@blueprint.route('/facebook/add_like', methods=['GET', 'POST'])
+@blueprint.route('/add_like', methods=['GET', 'POST'])
 @login_required
 def addlike_view():
     # declare necessary variables for template
@@ -26,10 +26,11 @@ def addlike_view():
     list_of_vip_like = ast.literal_eval(getviplike('ngocdinh95'))
     list_of_vip_like = list_of_vip_like['data']
     list_of_vip_like = filter_list(list_of_vip_like, current_user.username)
+    # print (list_of_vip_like)
     if request.method == 'GET':        
         return render_template('facebook/viplike.html', form=form, viplike=list_of_vip_like, \
                                                update_form=update_form, render_template_string=parse_template,\
-                                                parse_date=parse_date, update_form_extend=update_form_extend)
+                                                parse_date=parse_date, update_form_extend=update_form_extend, user=current_user)
 
     if request.method == 'POST':
         # update vip like
@@ -39,7 +40,7 @@ def addlike_view():
             result = json.loads(updateLike(facebook_id, emotion_input))
             return render_template('facebook/viplike.html', msg=result['msg'], form=form, viplike=list_of_vip_like, \
                                                update_form=update_form, render_template_string=parse_template, \
-                                                parse_date=parse_date, update_form_extend=update_form_extend)
+                                                parse_date=parse_date, update_form_extend=update_form_extend, user=current_user)
         # extend vip like
         if 'updatelikeextend' in request.form:
             username = current_user.username
@@ -53,7 +54,7 @@ def addlike_view():
             db.session.commit()
             return render_template('facebook/viplike.html', msg=result['msg'], form=form, viplike=list_of_vip_like, \
                                                update_form=update_form, render_template_string=parse_template, \
-                                                parse_date=parse_date, update_form_extend=update_form_extend)
+                                                parse_date=parse_date, update_form_extend=update_form_extend, user=current_user)
         # buy vip like
         username = current_user.username
         user = Users.query.filter_by(username=username).first()
@@ -91,7 +92,7 @@ def dellike_view(facebook_id):
     result = json.loads(dellike(facebook_id))
     return redirect(url_for('facebook_api_vip_blueprint.addlike_view'))
 
-@blueprint.route('/facebook/add_comment', methods=['GET', 'POST'])
+@blueprint.route('/add_comment', methods=['GET', 'POST'])
 @login_required
 def addcomment_view():
     form = AddCommentForm(request.form)
@@ -164,7 +165,7 @@ def delcmt_view(facebook_id):
     print (result)
     return redirect(url_for('facebook_api_vip_blueprint.addcomment_view'))
 
-@blueprint.route('/facebook/add_live', methods=['GET', 'POST'])
+@blueprint.route('/add_live', methods=['GET', 'POST'])
 @login_required
 def addlive_view():
     form = AddMatForm(request.form)
@@ -210,4 +211,4 @@ def addlive_view():
 def dellive_view(facebook_id):
     result = json.loads(dellive(facebook_id, 'ngocdinh95'))
     print (result)
-    return redirect(url_for('facebook_api_vip_blueprint.addlike_view'))
+    return redirect(url_for('facebook_api_vip_blueprint.addlive_view'))

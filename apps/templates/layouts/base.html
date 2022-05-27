@@ -21,26 +21,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="/static/assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="/static/assets/img/favicon.png">
-
   <title>
-    Flask Soft UI Dashboard - {% block title %}{% endblock %} | AppSeed
+    LIKE14 - Trang chủ
   </title>
-  
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
-  <link href="/static/assets/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="/static/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="static/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="static/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <link href="/static/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="static/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
-  <link id="pagestyle" href="/static/assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
-
-  <!-- Specific CSS goes HERE -->
-  {% block stylesheets %}{% endblock stylesheets %}
-
+  <link id="pagestyle" href="static/assets/css/soft-ui-dashboard.css?v=1.0.8" rel="stylesheet" />
 </head>
+
+<!-- THis is test section -->
+
+<!-- <body class="g-sidenav-show  bg-gray-100"> -->
 <body class="g-sidenav-show  bg-gray-100">
 
   {% include "includes/sidebar.html" %}
@@ -58,7 +56,18 @@
   {% include "includes/scripts.html" %}
 
   <!-- Specific JS goes HERE --> 
-  {% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+{% endblock javascripts %}
+<script src="/static/assets/js/core/popper.min.js"></script>
+<script src="/static/assets/js/core/bootstrap.min.js"></script>
+<script src="/static/assets/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+<!-- Kanban scripts -->
+<script src="/static/assets/js/plugins/dragula/dragula.min.js"></script>
+<script src="/static/assets/js/plugins/jkanban/jkanban.js"></script>
+<script src="/static/assets/js/plugins/chartjs.min.js"></script>
+<script src="/static/assets/js/plugins/threejs.js"></script>
+<script src="/static/assets/js/plugins/orbit-controls.js"></script>
 
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
@@ -74,7 +83,13 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
 
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="/static/assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
+  <script src="/static/assets/js/soft-ui-dashboard.min.js?v=1.0.8"></script>
+  <script src="/static/assets/js/custom/cus.common.js"></script>
+  <script>
+    COMMON.darkMode();
+    COMMON.navbarFixed();
+  </script>
+</body>
 
 </body>
 </html>
