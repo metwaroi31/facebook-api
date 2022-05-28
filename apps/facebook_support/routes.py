@@ -13,7 +13,7 @@ import json
 from apps import db, login_manager
 import ast
 
-@blueprint.route('/facebook/support_get_facebook', methods=['GET', 'POST'])
+@blueprint.route('/support_get_facebook', methods=['GET', 'POST'])
 def get_id_profile_view():
     form = FacebookIDUrl(request.form)
     # update_form = UpdateCommentForm(request.form)
@@ -28,7 +28,7 @@ def get_id_profile_view():
         print (facebook_id)
         return render_template('facebook/getid_profile.html', msg=facebook_id, form=form)
 
-@blueprint.route('/facebook/support_get_post', methods=['GET', 'POST'])
+@blueprint.route('/support_get_post', methods=['GET', 'POST'])
 def get_id_post_view():
     form = PostIDUrl(request.form)
     if request.method == 'GET':        

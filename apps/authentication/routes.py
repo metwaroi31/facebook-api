@@ -31,7 +31,7 @@ def route_default():
 @blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     login_form = LoginForm(request.form)
-    print (request.form)
+    print (request.form.__dict__)
     if 'login' in request.form:
 
         # read form data
@@ -39,7 +39,7 @@ def login():
         password = request.form['password']
         # Locate user
         user = Users.query.filter_by(username=username).first()
-        
+        print (user)
         # Check the password
         if user and verify_pass(password, user.password):
             login_user(user)
@@ -67,6 +67,7 @@ def register():
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
+        phone = request.form['phone']
         password_confirm = request.form['password_confirm']        
         
         # Check password first

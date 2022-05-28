@@ -6,6 +6,74 @@
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
+<section>
+  <div class="page-header min-vh-100">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
+          <div class="card card-plain">
+            <div class="card-header pb-0 text-left">
+              <h4 class="font-weight-bolder">Đăng ký</h4>
+              <p class="mb-0">Hãy nhập đầy đủ thông tin ở phía dưới</p>
+            </div>
+            <div class="card-body pb-3">
+              <form role="form text-left" method="post" action="">
+                <label>Username</label>
+                <div class="mb-3">
+                  {{ form.username(placeholder="Hãy điền username của bạn", class="form-control") }}
+
+                  <!-- <input type="text" class="form-control" placeholder="Hãy điền tên của bạn" aria-label="Name"> -->
+                </div>
+                <label>Email</label>
+                <div class="mb-3">
+                  {{ form.email(placeholder="Email", class="input form-control", type="email") }}
+                </div>
+                <label>số điện thoại</label>
+                <div class="mb-3">
+                  {{ form.phone(placeholder="số điện thoại", class="input form-control", type="email") }}
+                </div>
+                <label>Mật Khẩu</label>
+                <div class="mb-3">
+                  {{ form.password(placeholder="Password", class="form-control", type="password") }}
+                </div>
+                <div class="mb-3">
+                  {{ form.password_confirm(placeholder="Điền lại Password", class="form-control", type="password") }}
+
+                  <!-- <input type="password" class="form-control" placeholder="Điền lại Password" aria-label="Password"> -->
+                </div>
+                <div class="form-check form-check-info text-left">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Tôi đông ý <a href="../pages/privacy.html" class="text-dark font-weight-bolder">Các điều khoản và điều kiện</a>
+                  </label>
+                </div>
+                <div class="text-center">
+                  <button type="button" class="btn bg-gradient-primary w-100 mt-4 mb-0">Đăng ký</button>
+                </div>
+              </form>
+            </div>
+            <div class="card-footer text-center pt-0 px-sm-4 px-1">
+              <p class="mb-4 mx-auto">
+                Bạn đã có tài khoản ở LIKE14 rồi?
+                <a href="{{ url_for('authentication_blueprint.login') }}" class="text-primary text-gradient font-weight-bold">Đăng Nhập</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
+          <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center">
+            <img src="static/assets/img/shapes/pattern-lines.svg" alt="pattern-lines" class="position-absolute opacity-4 start-0">
+            <div class="position-relative">
+              <img class="max-width-500 w-100 position-relative z-index-2" src="static/assets/img/illustrations/rocket-white.png" alt="rocket">
+            </div>
+            <h4 class="mt-5 text-white font-weight-bolder">"Chạy mọi loại tương tác với LIKE14"</h4>
+            <p class="text-white">Kết nối với mọi nền tảng mạng xã hội hiện có, Chúng tôi là số 2, không ai là số 1</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
   <section>
     <div class="page-header section-height-75">
